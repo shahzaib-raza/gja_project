@@ -1,0 +1,109 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>{% block title %}GJA - Gems, Jewellery &amp; Watch Community{% endblock %}</title>
+
+  </head>
+
+  <body>
+    <header class="topbar">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="/#top">
+          <img class="brand-logo" src="{% static 'images/GJA_logo_transparent.png' %}" alt="GJA logo">
+        </a>
+        <!-- Hamburger -->
+        <button class="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <!-- Links -->
+        <div class="navlinks">
+          <a href="/#about">About</a>
+          <a href="/#members">Members</a>
+          <a href="/#events">Events</a>
+          <a href="/#join">Join Us</a>
+          <a href="/#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+    
+    <footer class="footer" id="contact">
+      <div class="footer-inner modern-footer">
+
+        <!-- Brand -->
+        <div class="footer-col brand-col">
+          <strong class="footer-logo">GJA</strong>
+          <p>Connecting Singapore’s gems, jewellery & watch community through collaboration and growth.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <a href="/#about">About</a>
+          <a href="/#members">Members</a>
+          <a href="/#events">Events</a>
+          <a href="/#join">Join Us</a>
+          <a href="/#contact">Contact</a>
+        </div>
+
+        <!-- Social -->
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        © 2026 GJA • All rights reserved
+      </div>
+    </footer>
+
+    {% block scripts %}
+    <script>
+      document.querySelectorAll('[data-carousel]').forEach(function(button){
+        button.addEventListener('click', function(){
+          var carousel = document.getElementById(button.dataset.carousel);
+          if (!carousel) return;
+          var direction = Number(button.dataset.dir || 1);
+          var amount = Math.max(260, carousel.clientWidth * 0.75);
+          carousel.scrollBy({ left: direction * amount, behavior: 'smooth' });
+        });
+      });
+    </script>
+    <script>
+      const toggle = document.querySelector('.menu-toggle');
+      const body = document.body;
+
+      if (toggle) {
+        toggle.addEventListener('click', () => {
+          body.classList.toggle('menu-open');
+        });
+      }
+
+      document.querySelectorAll('.navlinks a').forEach(link => {
+        link.addEventListener('click', () => {
+          body.classList.remove('menu-open');
+        });
+      });
+    </script>
+    {% endblock %}
+  </body>
+
+</html>
+

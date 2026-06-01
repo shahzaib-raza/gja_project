@@ -1,0 +1,45 @@
+{% extends 'events/base_event.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/events.css' %}">
+{% endblock %}
+
+{% block event_content %}
+<div class="event-detail">
+
+    <!-- HERO IMAGE -->
+    <div class="event-hero">
+        <img src="{{ event.image.url }}" alt="{{ event.title }}">
+        <div class="event-hero-overlay"></div>
+
+        <div class="event-hero-content">
+            <h1 class="serif">{{ event.title }}</h1>
+            <p class="event-location">{{ event.location }}</p>
+        </div>
+    </div>
+
+    <!-- INFO SECTION -->
+    <div class="event-info">
+
+        <div class="event-meta">
+            <div>
+                <strong>Start</strong>
+                <span>{{ event.start_date }}</span>
+            </div>
+
+            <div>
+                <strong>End</strong>
+                <span>{{ event.end_date }}</span>
+            </div>
+        </div>
+
+        <div class="event-description">
+            {{ event.description|linebreaks }}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

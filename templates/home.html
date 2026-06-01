@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+  <section class="hero" id="top">
+    <div class="hero-bg"><img src="{% static 'images/hero_banner_bg.png' %}" alt="Premium gemstone and jewellery hero visual"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Gemstones • Jewellery • Watches</div>
+        <h1 class="serif">Connecting Singapore’s Gems, Jewellery &amp; Watch Community</h1>
+        <p class="hero-copy">GJA brings together businesses, professionals and stakeholders across the industry through member promotion, events, initiatives and community programmes.</p>
+        <div class="hero-actions"><a class="btn light" href="#join">Join the Association</a><a class="btn secondary" href="#events">View Events & Initiatives</a></div>
+      </div>
+      <aside class="hero-floating">
+        <img src="{% static 'images/GJA_logo_transparent.png' %}" alt="GJA logo">
+        <strong>Supporting Members &amp; Strengthening Trade</strong>
+        <span>A platform dedicated to member growth, collaboration, and trade excellence.</span>
+      </aside>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="section-head"><h2 class="serif">A shared platform for the trade community</h2><p>GJA exists to support and strengthen the gems, jewellery and watch industry by creating visibility, connection and collaboration opportunities for businesses.</p></div>
+      <div class="placeholder-grid">
+        <div class="photo-placeholder"><span>[Insert event networking photo here]</span></div>
+        <div class="card"><div class="num">01</div><h3>About GJA</h3><p>Established in Singapore in 2026, GJA is a member-led association for the gems, jewellery and watch trade. We bring together industry professionals through networking, education, business exposure and shared initiatives that support long-term trade growth.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission-vision">
+    <div class="container">
+      <div class="section-head"><h2 class="serif">Mission &amp; Vision</h2><p>Guiding GJA’s role as a platform for member support, industry connection and long-term trade growth.</p></div>
+      <div class="cards two">
+        <article class="card">
+          <div class="num">M</div>
+          <h3>Our Mission</h3>
+          <p>To support and connect businesses across the gems, jewellery and watch trade by creating opportunities for visibility, collaboration, education and shared growth.</p>
+          <p>Through member-focused initiatives, networking platforms and industry programmes, GJA aims to help businesses strengthen their presence, build meaningful relationships and remain active within the trade community.</p>
+        </article>
+        <article class="card">
+          <div class="num">V</div>
+          <h3>Our Vision</h3>
+          <p>To establish GJA as a trusted voice and platform for Singapore’s gems, jewellery and watch community, promoting professionalism, unity and long-term industry growth.</p>
+          <p>We envision a stronger and more connected industry where members can collaborate with confidence, uphold good trade practices and create lasting value for businesses, professionals and the wider market.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="container">
+      <div class="section-head"><h2 class="serif">What GJA does</h2><p></p></div>
+      <div class="cards">
+        <article class="card"><div class="num">01</div><h3>Promote Members</h3><p>Showcase participating businesses and help the public and trade partners discover credible industry players.</p></article>
+        <article class="card"><div class="num">02</div><h3>Build Community</h3><p>Bring jewellers, gemstone dealers, watch businesses and supporting partners together through events and initiatives.</p></article>
+        <article class="card"><div class="num">03</div><h3>Support Growth</h3><p>Create programmes, visibility and collaboration channels that help businesses stay active and connected.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="navy-band" id="members">
+    <div class="container">
+      <div class="section-head"><h2 class="serif">A member community across the industry</h2><p></p></div>
+      <div class="carousel-wrap">
+        <div class="carousel" id="member-carousel" aria-label="Member community image carousel">
+          <div class="photo-placeholder dark"><span>[Insert member showroom / jewellery retail photo here]</span></div>
+          <div class="photo-placeholder dark"><span>[Insert gemstone close-up photo here]</span></div>
+          <div class="photo-placeholder dark"><span>[Insert watch detail photo here]</span></div>
+        </div>
+        <div class="carousel-controls"><button class="carousel-btn" type="button" data-carousel="member-carousel" data-dir="-1">‹</button><button class="carousel-btn" type="button" data-carousel="member-carousel" data-dir="1">›</button></div>
+      </div>
+      <div class="member-grid">
+        <a href="{% url 'members-category' 'gem' %}" class="member-tile">
+          <div>
+            <strong>Jewellery Retailers</strong>
+            <br>
+            <span>Showrooms, boutiques and trade retailers</span>
+          </div>
+          <div class="pill">Directory</div>
+        </a>
+        <a href="{% url 'members-category' 'jewellery' %}" class="member-tile">
+          <div>
+            <strong>Gemstone Dealers</strong>
+            <br>
+            <span>Coloured stones, diamonds and specialist dealers</span>
+          </div>
+          <div class="pill">Featured</div>
+        </a>
+        <a href="{% url 'members-category' 'watch' %}" class="member-tile">
+          <div>
+            <strong>Watch Businesses</strong>
+            <br>
+            <span>Retailers, collectors and service providers</span>
+          </div>
+          <div class="pill">Network</div>
+        </a>
+        <a href="{% url 'members-category' 'design' %}" class="member-tile">
+          <div>
+            <strong>Designers & Craftsmen</strong>
+            <br>
+            <span>Goldsmiths, designers, makers and artisans</span>
+          </div>
+          <div class="pill">Showcase</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="events">
+    <div class="container">
+      <div class="section-head"><h2 class="serif">Events, initiatives and programmes</h2><p>A dedicated section can show that GJA is active — with upcoming events, past highlights, photos, education sessions and collaboration opportunities.</p></div>
+      <div class="carousel-wrap">
+        <div class="carousel two" id="events-carousel" aria-label="Events and initiatives image carousel">
+          {% for event in events %}
+          <a href="{% url 'event-detail' event.slug %}" class="event-card">
+              {% if event.image %}
+                  <img src="{{ event.image.url }}" alt="{{ event.title }}">
+              {% else %}
+                  <span>No Image Available</span>
+              {% endif %}
+              <h3>{{ event.title }}</h3>
+          </a>
+          {% endfor %}
+        </div>
+        <div class="carousel-controls"><button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="-1">‹</button><button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="1">›</button></div>
+      </div>
+      <div class="cards" style="margin-top:22px">
+        <article class="card"><h3>Industry Gatherings</h3><p>Business networking nights, member introductions and relationship-building sessions.</p></article>
+        <article class="card"><h3>Talks & Workshops</h3><p>Gemstone awareness, retail knowledge, business operations and industry sharing.</p></article>
+        <article class="card"><h3>Member Showcases</h3><p>Campaigns and event features to help member businesses gain visibility.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head"><h2 class="serif">Committee &amp; Leadership</h2><p>Meet the committee guiding GJA’s direction, initiatives and member engagement across the gems, jewellery and watch trade.</p></div>
+      <div class="placeholder-grid">
+        <div class="card"><h3>Committee &amp; Leadership</h3><p>Meet the committee guiding GJA’s direction, initiatives and member engagement across the gems, jewellery and watch trade.</p></div>
+        <div class="photo-placeholder"><span>[Insert committee or leadership group photo here]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join">
+    <div class="container">
+      <div class="join-panel">
+        <div><h2 class="serif">Be part of Singapore’s Gems, Jewellery & Watch Community</h2><p>Interested businesses can enquire about membership, events, partnerships and future programmes through a simple contact flow.</p></div>
+        <a class="btn light" href="mailto:hello@gja.example">Contact GJA</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}

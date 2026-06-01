@@ -1,0 +1,2 @@
+user: gja_admin_su
+pass: super.user@acces2GJA

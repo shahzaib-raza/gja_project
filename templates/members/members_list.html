@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ category }} Members | GJA
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/members.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="members-page">
+
+    <div class="container">
+
+        <div class="section-head">
+            <h1 class="serif">
+                {{ category }} Members
+            </h1>
+
+            <p>
+                Explore businesses and professionals
+                in the {{ category|lower }} community.
+            </p>
+        </div>
+
+        <div class="member-grid">
+
+            {% for member in members %}
+
+            <div class="member-card">
+
+                <div class="member-logo">
+                    <img src="{{ member.logo.url }}" alt="{{ member.name }}">
+                </div>
+
+                <div class="member-info">
+                    <h3>{{ member.name }}</h3>
+                    <p>{{ member.description }}</p>
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="empty-state">
+                <h3>No Members Yet</h3>
+                <p>Members for this category will appear here.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
