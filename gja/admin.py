@@ -1,6 +1,10 @@
 from django.contrib import admin
 from .models import Member, Event
 
+admin.site.site_header = "GJA Administration"
+admin.site.site_title = "GJA Admin Portal"
+admin.site.index_title = "Welcome to GJA Management"
+
 # Register your models here.
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
