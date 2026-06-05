@@ -25,9 +25,20 @@ class Member(models.Model):
 
 class Event(models.Model):
 
+    CATEGORY_CHOICES = [
+        ('gatherings', 'Gatherings'),
+        ('workshops', 'Workshops'),
+        ('showcases', 'Showcases'),
+    ]
+
     title = models.CharField(max_length=255)
 
     slug = models.SlugField(unique=True)
+
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES
+    )
 
     short_description = models.TextField()
 
@@ -54,3 +65,30 @@ class Event(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class HomeImage(models.Model):
+
+    CATEGORY_CHOICES = [
+        ('hero', 'Hero'),
+        ('about', 'About'),
+        ('member', 'Member'),
+        ('leadership', 'Leadership'),
+    ]
+
+    image = models.ImageField(
+        upload_to='home/'
+    )
+
+    category = models.CharField(
+        max_length=20,
+        choices=CATEGORY_CHOICES
+    )
+
+    title = models.CharField(
+        max_length=100,
+        blank=True
+    )
+
+    def __str__(self):
+        return f"{self.category} - {self.image.name}"

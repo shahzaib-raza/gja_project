@@ -166,23 +166,21 @@
     display:grid;
     grid-template-columns:1.15fr .85fr;
     gap:18px;
-    align-items:stretch
+    align-items:stretch;
+    grid-auto-rows: 280px;
 }
  .placeholder-grid.three{
     grid-template-columns:repeat(3,1fr)
 }
  .photo-placeholder{
-    min-height:250px;
-    border-radius:30px;
-    border:1px dashed rgba(122,97,39,.45);
-    background:radial-gradient(circle at 72% 24%,rgba(200,164,93,.22),transparent 32%),linear-gradient(135deg,#fffaf0,#eadfc9);
-    display:grid;
-    place-items:center;
-    padding:24px;
-    text-align:center;
-    box-shadow:0 20px 50px rgba(13,23,41,.08);
-    position:relative;
-    overflow:hidden
+    min-height: 250px;
+    border-radius: 30px;
+    border: 1px dashed rgba(122,97,39,.45);
+    background: radial-gradient(circle at 72% 24%,rgba(200,164,93,.22),transparent 32%),
+                linear-gradient(135deg,#fffaf0,#eadfc9);
+    box-shadow: 0 20px 50px rgba(13,23,41,.08);
+    position: relative;
+    overflow: hidden;
 }
  .photo-placeholder.dark{
     background:linear-gradient(135deg,#14223a,#0d1729);
@@ -212,9 +210,25 @@
     border-color:rgba(255,255,255,.14);
     color:#fff
 }
- .carousel-wrap{
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.carousel-wrap{
     position:relative;
     margin-bottom:22px
+}
+.carousel-item {
+    flex: 0 0 calc((100% - 36px)/3);
+    height: 260px;
+    border-radius: 30px;
+    overflow: hidden;
+    scroll-snap-align: start;
+    position: relative;
 }
 .carousel{
     display:flex;
@@ -240,6 +254,12 @@
     flex:0 0 calc((100% - 36px)/3);
     scroll-snap-align:start;
     margin:0
+}
+.carousel-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 .carousel.two .photo-placeholder{
     flex-basis:calc((100% - 18px)/2)

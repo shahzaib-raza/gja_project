@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/members.css' %}">
+{% endblock %}
+
+{% block title %}
+{{ category }} Events | GJA
+{% endblock %}
+
+{% block content %}
+
+<section class="members-page">
+
+    <div class="container">
+
+        <div class="section-head">
+            <h1 class="serif">
+                {{ category }} Events
+            </h1>
+
+            <p>
+                Explore events in the
+                {{ category|lower }} category.
+            </p>
+        </div>
+
+        <div class="member-grid">
+            {% for event in events %}
+            <a href="{% url 'event-detail' event.slug %}" class="member-card">
+                <div class="event-image">
+                {% if event.image %}
+                    <img src="{{ event.image.url }}" alt="{{ event.title }}">
+                {% else %}
+                    <span>No Image Available</span>
+                {% endif %}
+                </div>
+
+                <div class="event-info">
+                    <h3>{{ event.title }}</h3>
+
+                    <p class="event-description">
+                        {{ event.short_description }}
+                    </p>
+
+                    <p class="event-meta">
+                        <strong>Start:</strong> {{ event.start_date }}
+                    </p>
+
+                    <p class="event-meta">
+                        <strong>End:</strong> {{ event.end_date }}
+                    </p>
+
+                    <p class="event-meta">
+                        <strong>Location:</strong> {{ event.location }}
+                    </p>
+                </div>
+            </a>
+
+            {% empty %}
+
+            <div class="empty-state">
+                <h3>No Events Yet</h3>
+                <p>Events for this category will appear here.</p>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

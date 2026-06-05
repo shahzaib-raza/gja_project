@@ -31,6 +31,12 @@ urlpatterns = [
     ),
 
     path(
+        'events/category/<slug:slug>/',
+        views.events_by_category,
+        name='events-category'
+    ),
+
+    path(
         'events/<slug:slug>/',
         views.event_detail,
         name='event-detail'

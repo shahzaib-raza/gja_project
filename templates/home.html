@@ -7,7 +7,7 @@
 
 {% block content %}
   <section class="hero" id="top">
-    <div class="hero-bg"><img src="{% static 'images/hero_banner_bg.png' %}" alt="Premium gemstone and jewellery hero visual"></div>
+    <div class="hero-bg"><img src="{{ hero_image.image.url }}" alt="Premium gemstone and jewellery hero visual"></div>
     <div class="hero-inner">
       <div>
         <div class="eyebrow">Gemstones • Jewellery • Watches</div>
@@ -25,9 +25,18 @@
 
   <section id="about">
     <div class="container">
-      <div class="section-head"><h2 class="serif">A shared platform for the trade community</h2><p>GJA exists to support and strengthen the gems, jewellery and watch industry by creating visibility, connection and collaboration opportunities for businesses.</p></div>
+      <div class="section-head">
+        <h2 class="serif">A shared platform for the trade community</h2>
+        <p>GJA exists to support and strengthen the gems, jewellery and watch industry by creating visibility, connection and collaboration opportunities for businesses.</p>
+      </div>
       <div class="placeholder-grid">
-        <div class="photo-placeholder"><span>[Insert event networking photo here]</span></div>
+        <div class="photo-placeholder">
+          {% if about_image %}
+              <img src="{{ about_image.image.url }}" alt="About GJA">
+          {% else %}
+              <span>[Insert event networking photo here]</span>
+          {% endif %}
+        </div>
         <div class="card"><div class="num">01</div><h3>About GJA</h3><p>Established in Singapore in 2026, GJA is a member-led association for the gems, jewellery and watch trade. We bring together industry professionals through networking, education, business exposure and shared initiatives that support long-term trade growth.</p></div>
       </div>
     </div>
@@ -70,9 +79,21 @@
       <div class="section-head"><h2 class="serif">A member community across the industry</h2><p></p></div>
       <div class="carousel-wrap">
         <div class="carousel" id="member-carousel" aria-label="Member community image carousel">
-          <div class="photo-placeholder dark"><span>[Insert member showroom / jewellery retail photo here]</span></div>
-          <div class="photo-placeholder dark"><span>[Insert gemstone close-up photo here]</span></div>
-          <div class="photo-placeholder dark"><span>[Insert watch detail photo here]</span></div>
+          {% for image in member_images %}
+              <div class="carousel-item">
+                  <img src="{{ image.image.url }}" alt="Member Image">
+              </div>
+          {% empty %}
+              <div class="photo-placeholder dark">
+                  <span>[Insert member showroom / jewellery retail photo here]</span>
+              </div>
+              <div class="photo-placeholder dark">
+                  <span>[Insert gemstone close-up photo here]</span>
+              </div>
+              <div class="photo-placeholder dark">
+                  <span>[Insert watch detail photo here]</span>
+              </div>
+          {% endfor %}
         </div>
         <div class="carousel-controls"><button class="carousel-btn" type="button" data-carousel="member-carousel" data-dir="-1">‹</button><button class="carousel-btn" type="button" data-carousel="member-carousel" data-dir="1">›</button></div>
       </div>
@@ -83,7 +104,7 @@
             <br>
             <span>Showrooms, boutiques and trade retailers</span>
           </div>
-          <div class="pill">Directory</div>
+          <div class="pill">Members</div>
         </a>
         <a href="{% url 'members-category' 'gem' %}" class="member-tile">
           <div>
@@ -91,7 +112,7 @@
             <br>
             <span>Coloured stones, diamonds and specialist dealers</span>
           </div>
-          <div class="pill">Featured</div>
+          <div class="pill">Members</div>
         </a>
         <a href="{% url 'members-category' 'watch' %}" class="member-tile">
           <div>
@@ -99,7 +120,7 @@
             <br>
             <span>Retailers, collectors and service providers</span>
           </div>
-          <div class="pill">Network</div>
+          <div class="pill">Members</div>
         </a>
         <a href="{% url 'members-category' 'design' %}" class="member-tile">
           <div>
@@ -107,7 +128,7 @@
             <br>
             <span>Goldsmiths, designers, makers and artisans</span>
           </div>
-          <div class="pill">Showcase</div>
+          <div class="pill">Members</div>
         </a>
       </div>
     </div>
@@ -129,12 +150,30 @@
           </a>
           {% endfor %}
         </div>
-        <div class="carousel-controls"><button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="-1">‹</button><button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="1">›</button></div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="-1">‹</button>
+          <button class="carousel-btn" type="button" data-carousel="events-carousel" data-dir="1">›</button>
+        </div>
       </div>
       <div class="cards" style="margin-top:22px">
-        <article class="card"><h3>Industry Gatherings</h3><p>Business networking nights, member introductions and relationship-building sessions.</p></article>
-        <article class="card"><h3>Talks & Workshops</h3><p>Gemstone awareness, retail knowledge, business operations and industry sharing.</p></article>
-        <article class="card"><h3>Member Showcases</h3><p>Campaigns and event features to help member businesses gain visibility.</p></article>
+        <a href="{% url 'events-category' 'gatherings' %}" class="card">
+          <article>
+            <h3>Industry Gatherings</h3>
+            <p>Business networking nights, member introductions and relationship-building sessions.</p>
+          </article>
+        </a>
+        <a href="{% url 'events-category' 'workshops' %}" class="card">
+          <article>
+            <h3>Talks & Workshops</h3>
+            <p>Gemstone awareness, retail knowledge, business operations and industry sharing.</p>
+          </article>
+        </a>
+        <a href="{% url 'events-category' 'showcases' %}" class="card">
+          <article>
+            <h3>Member Showcases</h3>
+            <p>Campaigns and event features to help member businesses gain visibility.</p>
+          </article>
+        </a>
       </div>
     </div>
   </section>
@@ -144,7 +183,13 @@
       <div class="section-head"><h2 class="serif">Committee &amp; Leadership</h2><p>Meet the committee guiding GJA’s direction, initiatives and member engagement across the gems, jewellery and watch trade.</p></div>
       <div class="placeholder-grid">
         <div class="card"><h3>Committee &amp; Leadership</h3><p>Meet the committee guiding GJA’s direction, initiatives and member engagement across the gems, jewellery and watch trade.</p></div>
-        <div class="photo-placeholder"><span>[Insert committee or leadership group photo here]</span></div>
+        <div class="photo-placeholder">
+          {% if leadership_image %}
+              <img src="{{ leadership_image.image.url }}" alt="Leadership">
+          {% else %}
+              <span>[Insert committee or leadership group photo here]</span>
+          {% endif %}
+        </div>
       </div>
     </div>
   </section>

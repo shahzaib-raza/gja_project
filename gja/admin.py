@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, Event
+from .models import Member, Event, HomeImage
 
 admin.site.site_header = "GJA Administration"
 admin.site.site_title = "GJA Admin Portal"
@@ -24,3 +24,10 @@ class EventAdmin(admin.ModelAdmin):
 
     # Optional: auto-fill slug from title
     prepopulated_fields = {'slug': ('title',)}
+
+@admin.register(HomeImage)
+class HomeImageAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'image')
+    list_filter = ('category',)
+    search_fields = ('title', 'category')
+    ordering = ('category',)
