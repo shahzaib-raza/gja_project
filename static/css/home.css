@@ -172,6 +172,15 @@
  .placeholder-grid.three{
     grid-template-columns:repeat(3,1fr)
 }
+
+@media (max-width: 960px) {
+    .placeholder-grid,
+    .placeholder-grid.three {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        grid-auto-rows: auto;
+    }
+}
+
  .photo-placeholder{
     min-height: 250px;
     border-radius: 30px;
@@ -386,6 +395,15 @@
 
 .event-card:hover img {
     transform: scale(1.1);
+}
+
+@media (max-width: 960px) {
+    .event-card {
+        min-width: 100%;
+    }
+    .carousel-item{
+        min-width: 100%;
+    }
 }
 
 /* Responsive */
